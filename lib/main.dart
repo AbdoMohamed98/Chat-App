@@ -1,3 +1,4 @@
+import 'package:chatapp/views/homeview.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,7 +12,7 @@ class ChatApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ,
+      home:Homeview() ,
     );
   }
 }
