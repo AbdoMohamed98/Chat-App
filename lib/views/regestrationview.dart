@@ -1,8 +1,8 @@
 import 'package:chatapp/widgets/customtextfield.dart';
 import 'package:flutter/material.dart';
 
-class Homeview extends StatelessWidget {
-  const Homeview({super.key});
+class Regestrationview extends StatelessWidget {
+  const Regestrationview ({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class Homeview extends StatelessWidget {
                 child: Image(image: AssetImage('assets/image1.jpg'))),
             const Text('Scholar Chat', style: TextStyle(color: Colors.white)),
             Spacer(flex: 1,),
-            const Text('Sign In',style: TextStyle(
+            const Text('Regester',style: TextStyle(
               color: Colors.white,
             ),),
             SizedBox(height: 20),
@@ -39,7 +39,7 @@ class Homeview extends StatelessWidget {
               ),
               height: 50,
               width: double.infinity,
-              child: Center(child: Text('LOGIN')),
+              child: Center(child: Text('REGESTER')),
             ),
             SizedBox(height: 15,),
             Row(
@@ -52,9 +52,11 @@ class Homeview extends StatelessWidget {
                     onTap: () {
                       Navigator.pushNamed(context, 'Regesteation_page',);
                     },
-                    child: Text(  'Regester',style: TextStyle(
+                    child: Text(  'LOGIN IN',style: TextStyle(
                       color: Colors.white,
-                    ),))
+                    ),)
+                    
+                    )
               ],
             ),
             Spacer(flex: 1,)
