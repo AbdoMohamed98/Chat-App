@@ -24,6 +24,7 @@ class ChatApp extends StatelessWidget {
       routes: {
         'Regesteation_page' : (context) => Regestrationview()
       },
+     
       home: Homeview(),
     );
   }
