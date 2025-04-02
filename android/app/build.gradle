@@ -1,0 +1,51 @@
+plugins {
+    id("com.android.application")
+    id("kotlin-android")
+    id("dev.flutter.flutter-gradle-plugin")
+
+    // 👉 Add Google Services plugin for Firebase
+    id("com.google.gms.google-services")
+}
+
+android {
+    namespace = "com.example.chatapp"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId = "com.example.chatapp"
+        minSdk = flutter.minSdkVersion
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+    }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.debug
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}
+
+dependencies {
+    // 👉 Add Firebase BoM (Bill of Materials)
+    implementation(platform("com.google.firebase:firebase-bom:33.10.0"))
+
+    // 👉 Example Firebase SDK (Analytics - optional, can remove if not used)
+    implementation("com.google.firebase:firebase-analytics")
+
+    // 👉 You can add other Firebase products here if needed
+}
