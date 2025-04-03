@@ -1,4 +1,5 @@
 import 'package:chatapp/firebase_options.dart';
+import 'package:chatapp/views/chatview.dart';
 import 'package:chatapp/views/homeview.dart';
 import 'package:chatapp/views/regestrationview.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -22,7 +23,8 @@ class ChatApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        'Regesteation_page' : (context) => Regestrationview()
+        'Regesteation_page' : (context) => Regestrationview(),
+        'Chatview' :(context) => Chatview(),
       },
      
       home: Homeview(),
