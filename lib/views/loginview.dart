@@ -4,14 +4,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class Homeview extends StatefulWidget {
-  const Homeview({super.key});
+class Loginview extends StatefulWidget {
+  const Loginview({super.key});
 
   @override
-  State<Homeview> createState() => _HomeviewState();
+  State<Loginview> createState() => _HomeviewState();
 }
 
-class _HomeviewState extends State<Homeview> {
+class _HomeviewState extends State<Loginview> {
   GlobalKey<FormState> formkey = GlobalKey();
   String? email, password;
   bool isLoading = false; // State variable to track loading

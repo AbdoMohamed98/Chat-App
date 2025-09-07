@@ -1,0 +1,2 @@
+C:/Users/lenovo/Chat-App/android/app/.cxx/Debug/6g3y6y38/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/lenovo/Chat-App/android/app/.cxx/Debug/6g3y6y38/arm64-v8a/CMakeFiles/rebuild_cache.dir

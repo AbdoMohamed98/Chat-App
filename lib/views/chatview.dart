@@ -12,8 +12,18 @@ class _ChatviewState extends State<Chatview> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+
         backgroundColor: Colors.amber,
-        title: Text('Chat'),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircleAvatar(
+              backgroundImage: AssetImage('assets/image1.jpg'),
+            ),
+            SizedBox(width: 10),
+            Text('Chat with User'),
+          ],
+        ),
       ),
       body:  Container(
           height: 100,

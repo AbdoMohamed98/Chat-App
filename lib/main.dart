@@ -1,6 +1,7 @@
 import 'package:chatapp/firebase_options.dart';
+import 'package:chatapp/navigation/router_generation_config.dart';
 import 'package:chatapp/views/chatview.dart';
-import 'package:chatapp/views/homeview.dart';
+import 'package:chatapp/views/loginview.dart';
 import 'package:chatapp/views/regestrationview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -20,14 +21,12 @@ class ChatApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      routes: {
-        'Regesteation_page' : (context) => Regestrationview(),
-        'Chatview' :(context) => Chatview(),
-      },
-     
-      home: Homeview(),
+      routerConfig: RouterGenerationConfig.goRouter,
+      theme: ThemeData(
+        primarySwatch: Colors.amber,
+      ),
     );
   }
 }
