@@ -1,3 +1,4 @@
+import 'package:chatapp/widgets/chatbubble.dart';
 import 'package:flutter/material.dart';
 
 class Chatview extends StatefulWidget {
@@ -25,23 +26,15 @@ class _ChatviewState extends State<Chatview> {
           ],
         ),
       ),
-      body:  Container(
-          height: 100,
-          width: 200,
-          decoration: BoxDecoration(
-            color: Colors.blue, // Background color
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),   // Top-left corner
-              topRight: Radius.circular(20),  // Top-right corner
-              bottomRight: Radius.circular(20), // Bottom-right corner
-            ),
+      body:  Column(
+        children: [
+          Expanded(
+            child: ListView.builder(itemBuilder: (context, index) {
+              return Chatbubble();
+            }, itemCount: 10, ),
           ),
-        
-          child: Text(
-            'Hello Chat!',
-            style: TextStyle(color: Colors.white, fontSize: 16),
-          ),
-        ),
+        ],
+      )
       
     );
   }
