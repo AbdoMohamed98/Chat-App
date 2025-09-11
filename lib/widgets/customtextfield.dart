@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 
 class Customtextfield extends StatelessWidget {
-     const Customtextfield({
-    this.onsubmitted
-    ,super.key
-  });
-    final ValueChanged<String>? onsubmitted;
+  const Customtextfield({
+    Key? key,
+    required this.onsubmitted,
+    required this.controller,
+  }) : super(key: key);
+
+  final ValueChanged<String> onsubmitted;
+  final TextEditingController controller;
+
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller, // 🔑 connect controller here
       onSubmitted: onsubmitted,
       decoration: InputDecoration(
         border: OutlineInputBorder(
@@ -16,17 +21,16 @@ class Customtextfield extends StatelessWidget {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
-          borderSide: BorderSide(color: Colors.grey),
+          borderSide: const BorderSide(color: Colors.grey),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
-          borderSide: BorderSide(color: Colors.blue),
+          borderSide: const BorderSide(color: Colors.blue),
         ),
         hintText: 'Type a message',
-        suffixIcon: Icon(
-          Icons.send,
-          
-          color: Colors.blue,
+        suffixIcon: IconButton(
+          icon: const Icon(Icons.send, color: Colors.blue),
+          onPressed: () => onsubmitted(controller.text), // 🔑 send on tap
         ),
       ),
     );

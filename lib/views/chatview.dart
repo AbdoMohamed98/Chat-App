@@ -1,3 +1,4 @@
+import 'package:chatapp/models/messagemodel.dart';
 import 'package:chatapp/widgets/chatbubble.dart';
 import 'package:chatapp/widgets/customtextfield.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -9,47 +10,83 @@ class Chatview extends StatefulWidget {
   @override
   State<Chatview> createState() => _ChatviewState();
 }
-  final CollectionReference messages =
-      FirebaseFirestore.instance.collection('messages');
- 
+
 class _ChatviewState extends State<Chatview> {
+  Stream collectionStream = FirebaseFirestore.instance.collection('messages').snapshots();
+Stream documentStream = FirebaseFirestore.instance.collection('messages').doc().snapshots();
+
+  final TextEditingController controller = TextEditingController();
+  
+  
+ 
+
+  @override
+  void dispose() {
+    controller.dispose(); // clean up when widget is removed
+    super.dispose();
+  }
+  CollectionReference messages = FirebaseFirestore.instance.collection('messages');
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-
-        backgroundColor: Colors.amber,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CircleAvatar(
-              backgroundImage: AssetImage('assets/image1.jpg'),
-            ),
-            SizedBox(width: 10),
-            Text('Chat with User'),
-          ],
+    return StreamBuilder(
+  stream: messages.snapshots(),
+  builder: (context, snapshot) {
+    if (snapshot.hasError) {
+      return const Center(child: Text("Something went wrong"));
+    } else if (snapshot.hasData) {
+      List<Messagemodel> messagelist = [];
+      for (int i=0; i<snapshot.data!.docs.length; i++) {
+        messagelist.add(
+          Messagemodel.fromjson(snapshot.data!.docs[i].data() )
+        );
+      }
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.amber,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              CircleAvatar(
+                backgroundImage: AssetImage('assets/image1.jpg'),
+              ),
+              SizedBox(width: 10),
+              Text('Chat with User'),
+            ],
+          ),
         ),
-      ),
-      body:  Padding(
-        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView.builder(itemBuilder: (context, index) {
-                return Chatbubble();
-              }, itemCount: 10, ),
-            ),
-            Customtextfield(
-          onsubmitted:(data){
-            messages.add({'text':data, 'createdAt':Timestamp.now()
-
-          } ,
-            );})
-          ],
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: messagelist.length,
+                  itemBuilder: (context, index) {
+                    return Chatbubble(
+                       messagemodel: messagelist[index],
+                    );
+                  },
+                ),
+              ),
+              Customtextfield(
+                controller: controller,
+                onsubmitted: (data) {
+                  messages.add({
+                    'text': data,
+                    'createdAt': Timestamp.now(),
+                  });
+                  controller.clear();
+                },
+              ),
+            ],
+          ),
         ),
-      )
-      
-    );
+      );
+    }
+    return Text('Loading...');
+    
+  },
+);
+
   }
 }
-
