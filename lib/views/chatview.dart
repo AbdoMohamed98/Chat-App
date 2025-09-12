@@ -29,7 +29,7 @@ Stream documentStream = FirebaseFirestore.instance.collection('messages').doc().
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-  stream: messages.snapshots(),
+  stream: messages.orderBy('createdAt').snapshots(),
   builder: (context, snapshot) {
     if (snapshot.hasError) {
       return const Center(child: Text("Something went wrong"));
